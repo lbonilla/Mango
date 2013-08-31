@@ -63,7 +63,7 @@ public class IGMViewManager : MonoBehaviour {
 
 		controllerManager = GameObject.FindGameObjectWithTag("IGMControllerManager").GetComponent<IGMControllerManager>();
 
-		//1.Create futile layer.
+		//1.Create Futile layer.
 		//2.Set the Futile object to use the Futile new layer.
 		//3. Add lines to Futile.cs line 122
 			//Esteban: to use Futile as UI

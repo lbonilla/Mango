@@ -26,7 +26,7 @@ public class World : MonoBehaviour {
 #endregion
 
 #region Private Variables
-	private int positions = 40;
+	private int slotAvailable = 40;
 	private float angle = 0;
 #endregion
 
@@ -47,7 +47,7 @@ public class World : MonoBehaviour {
 		float buildingYPos = -10;
 
 		GameObject go = null;
-		for(int i = 0; i < positions; i++){	
+		for(int i = 0; i < slotAvailable; i++){	
 
 			buildingXPos = GetXPosWithAngleAndRadius(angle, radius);
 			buildingYPos = GetYPosWithAngleAndRadius(angle, radius);// + ypos;					
@@ -159,7 +159,7 @@ public class World : MonoBehaviour {
 		if(slots[index].GetComponent<WorldSlot>().IsFree){
 			return true;
 		}else{
-			if(index == (positions - 1)){ 
+			if(index == (slotAvailable - 1)){ 
 				print("Not Slots available");
 				return false; 
 			} else { 
@@ -172,7 +172,7 @@ public class World : MonoBehaviour {
 	public WorldSlot GetFreeSlot(int value){
 		if(!CheckForFreeSlots(0)){ return null; }		
 
-		if(value == positions){ value = 0;}
+		if(value == slotAvailable){ value = 0;}
 
 		if(slots[value].GetComponent<WorldSlot>().IsFree){
 			slots[value].GetComponent<WorldSlot>().IsFree = false;

@@ -71,7 +71,6 @@ public class Quarry : Facility {
     }
 
 	override public void CompletedProduct(){
-		print("CompletedProduct quarry");
 		timer.Play(); 
 		this.Owner.Stone += this.Product;
 		this.Owner.UpdateData();

@@ -44,6 +44,7 @@ public class InGameManager : MonoBehaviour {
 	void UpdatePlayersOnInit(){
 		UpdatePlayer(player1);
 		UpdatePlayer(player2);
+
 		AddBuilding(Players.Player1);
 		AddEnergyPlant(Players.Player1);
 		AddWoodMill(Players.Player1);
@@ -79,7 +80,6 @@ public class InGameManager : MonoBehaviour {
 		switch(pPlayer){
 			case Players.Player1:
 			{
-				//print("CheckPlayerResources P1");
 				//checking on building
 				if(player1.Wood >= Data.building.wood 
 					&& player1.Stone >= Data.building.stone
@@ -179,7 +179,6 @@ public class InGameManager : MonoBehaviour {
 			break;
 			case Players.Player2:
 			{
-				print("CheckPlayerResources P2");
 				//checking on building
 				if(player2.Wood >= Data.building.wood 
 					&& player2.Stone >= Data.building.stone
@@ -295,7 +294,6 @@ public class InGameManager : MonoBehaviour {
 			//canAddMissile = false;
 			//AddMissile(new Vector3(ray.origin.x, ray.origin.y, 17.0f));
 		}
-
 
 	}
 
