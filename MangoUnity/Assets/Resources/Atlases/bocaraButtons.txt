@@ -1,0 +1,212 @@
+{"frames": {
+
+"Abadi55.png":
+{
+	"frame": {"x":2,"y":2,"w":508,"h":262},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":508,"h":262},
+	"sourceSize": {"w":512,"h":512}
+},
+"AbadiBlue.png":
+{
+	"frame": {"x":2,"y":386,"w":248,"h":118},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":1,"w":248,"h":118},
+	"sourceSize": {"w":256,"h":128}
+},
+"AbadiRed.png":
+{
+	"frame": {"x":2,"y":266,"w":248,"h":118},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":1,"w":248,"h":118},
+	"sourceSize": {"w":256,"h":128}
+},
+"buildingBlueBtn_tex.png":
+{
+	"frame": {"x":462,"y":392,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"buildingRedBtn_tex.png":
+{
+	"frame": {"x":420,"y":392,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"defenderBlueBtn_tex.png":
+{
+	"frame": {"x":378,"y":434,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"defenderRedBtn_tex.png":
+{
+	"frame": {"x":378,"y":392,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"energyBlueBtn_tex.png":
+{
+	"frame": {"x":462,"y":350,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"energyRedBtn_tex.png":
+{
+	"frame": {"x":446,"y":266,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"factoryBlueBtn_tex.png":
+{
+	"frame": {"x":420,"y":350,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"factoryRedBtn_tex.png":
+{
+	"frame": {"x":378,"y":350,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"idleBlueBtn_tex.png":
+{
+	"frame": {"x":349,"y":308,"w":95,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":95,"h":40},
+	"sourceSize": {"w":95,"h":40}
+},
+"idleRedBtn_tex.png":
+{
+	"frame": {"x":252,"y":308,"w":95,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":95,"h":40},
+	"sourceSize": {"w":95,"h":40}
+},
+"labBlueBtn_tex.png":
+{
+	"frame": {"x":336,"y":434,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"labRedBtn_tex.png":
+{
+	"frame": {"x":336,"y":392,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"metalBlueBtn_tex.png":
+{
+	"frame": {"x":336,"y":350,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"metalRedBtn_tex.png":
+{
+	"frame": {"x":294,"y":434,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"missileBlueBtn_tex.png":
+{
+	"frame": {"x":294,"y":392,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"missileRedBtn_tex.png":
+{
+	"frame": {"x":294,"y":350,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"overBlueBtn_tex.png":
+{
+	"frame": {"x":349,"y":266,"w":95,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":95,"h":40},
+	"sourceSize": {"w":95,"h":40}
+},
+"overRedBtn_tex.png":
+{
+	"frame": {"x":252,"y":266,"w":95,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":95,"h":40},
+	"sourceSize": {"w":95,"h":40}
+},
+"stoneBlueBtn_tex.png":
+{
+	"frame": {"x":252,"y":434,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"stoneRedBtn_tex.png":
+{
+	"frame": {"x":252,"y":392,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"woodBlueBtn_tex.png":
+{
+	"frame": {"x":252,"y":350,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+},
+"woodRedBtn_tex.png":
+{
+	"frame": {"x":446,"y":308,"w":40,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
+	"sourceSize": {"w":40,"h":40}
+}},
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "bocaraButtons.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":512},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:f676efc5bf357ffc30675ff95e1c480f$"
+}
+}
