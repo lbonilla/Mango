@@ -2,14 +2,41 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class World : MonoBehaviour {
+// File: World
+// Project:
+// Description:
+// Author:Esteban Padilla
+// Email: 
+// Copyright (C) 2013,  (R). All rights reserved.  
 
+public class World : MonoBehaviour {
+#region Enums
+#endregion
+
+#region Delegates
+#endregion
+
+#region Constants
+#endregion
+
+#region Public Variables
 	public float speed = 1.0f;
 	public GameObject slot;
 	public List<GameObject> slots = new List<GameObject>();
+#endregion
+
+#region Private Variables
 	private int positions = 40;
 	private float angle = 0;
+#endregion
 
+#region Properties
+#endregion
+
+#region Constructors
+#endregion
+
+#region Unity Methods
 	// Use this for initialization
 	void Start () {
 		float xpos = transform.position.x;
@@ -22,30 +49,38 @@ public class World : MonoBehaviour {
 		GameObject go = null;
 		for(int i = 0; i < positions; i++){	
 
-				print("Angle: " + angle);
-				buildingXPos = GetXPosWithAngleAndRadius(angle, radius);
-				buildingYPos = GetYPosWithAngleAndRadius(angle, radius);// + ypos;					
-				print("Process: " + GetAngleFromPosition(xpos, ypos, (xpos - buildingXPos), (buildingYPos + ypos)));
-	
-				//slots.Add(new WorldSlot(new Vector3((xpos - buildingXPos), (buildingYPos + ypos), 0f), angle, i));
-				
-				Vector3 pos = new Vector3((xpos - buildingXPos), (buildingYPos + ypos), 0f);
-				go = Instantiate(slot, pos, Quaternion.identity) as GameObject;
-				go.name = "slot_" + i;
-				go.transform.Rotate(new Vector3(0, 0, 1), angle);				
-				go.gameObject.transform.parent = this.transform;
-				slots.Add(go);				
+			buildingXPos = GetXPosWithAngleAndRadius(angle, radius);
+			buildingYPos = GetYPosWithAngleAndRadius(angle, radius);// + ypos;					
 
+			//slots.Add(new WorldSlot(new Vector3((xpos - buildingXPos), (buildingYPos + ypos), 0f), angle, i));
+			
+			Vector3 pos = new Vector3((xpos - buildingXPos), (buildingYPos + ypos), 0f);
+			go = Instantiate(slot, pos, Quaternion.identity) as GameObject;
+			go.name = "slot_" + i;
+			go.transform.Rotate(new Vector3(0, 0, 1), angle);				
+			go.gameObject.transform.parent = this.transform;
+			slots.Add(go);				
 
-				go.GetComponent<WorldSlot>().Position = pos;
-				go.GetComponent<WorldSlot>().IsFree = true;
-				go.GetComponent<WorldSlot>().Id = i;
-				go.GetComponent<WorldSlot>().Angle = angle;				
-//	
-				angle += 9f;
+			go.GetComponent<WorldSlot>().Position = pos;
+			go.GetComponent<WorldSlot>().IsFree = true;
+			go.GetComponent<WorldSlot>().Id = i;
+			go.GetComponent<WorldSlot>().Angle = angle;				
+			
+			angle += 9f;
 		}	
 	}
 
+	// Update is called once per frame
+	void Update () {
+		gameObject.transform.RotateAround(gameObject.transform.position, Vector3.forward, speed * Time.deltaTime);
+	}
+
+	void OnTriggerEnter(Collider other) {		 
+		Destroy(other.gameObject);
+    }
+#endregion
+
+#region Game Methods
 	private float Sine(float angle){
 		float sin = Mathf.Sin((Mathf.PI / 180)* angle);
 		return sin;
@@ -86,18 +121,14 @@ public class World : MonoBehaviour {
 			o = x2 - x1;
 			a = y1 - y2;
 			doingC = true;
-		}else if( x1 <= x2 && y1 <= y2){
+		}else if( x1 <= x2 && y1 <= y2){//set for D 
 			o = y2 - y1;
 			a = x2 -x1;
 			doingD = true;
 		}
 
-		
-
-
-
-		print("o: " + o);
-		print("a: " + a);
+//		print("o: " + o);
+//		print("a: " + a);
 
 		float angle = Mathf.Rad2Deg*Mathf.Atan(o / a);
 		angle = Mathf.Ceil(angle);
@@ -109,15 +140,6 @@ public class World : MonoBehaviour {
 		return angle;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		gameObject.transform.RotateAround(gameObject.transform.position, Vector3.forward, speed * Time.deltaTime);
-	}
-
-	void OnTriggerEnter(Collider other) {		 
-		Destroy(other.gameObject);
-    }
-
 	public WorldSlot GetNextSlot(){
 		WorldSlot sl = null;
 		foreach(GameObject ws in slots){
@@ -163,4 +185,6 @@ public class World : MonoBehaviour {
 			return GetFreeSlot(value);
 		}
 	}
+#endregion
+
 }

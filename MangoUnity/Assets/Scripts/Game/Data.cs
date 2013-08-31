@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 public class Data {
 #region Structs
-public struct FacilityData { public int life, citizen, worker, energyRequired, energyProduced, wood, metal, stone, product, productionTime, missiles; }
+public struct FacilityData { public int life, citizen, worker, energyRequired, energyProduced, wood, metal, stone, product, productionTime, missiles, missileLoad; }
 public static FacilityData player;
 public static FacilityData building;
 public static FacilityData energyPlant;
@@ -46,17 +46,18 @@ public static string winner = "";
 	public Data(){ // constructor
 		//Facility Settings
 		//Player
-		player.life				= 0;
-		player.citizen 			= 5;
-		player.worker     		= 0;
-		player.energyRequired 	= 0;
-		player.energyProduced 	= 5;
+		player.life				=  0;
+		player.citizen 			=  5;
+		player.worker     		=  0;
+		player.energyRequired 	=  0;
+		player.energyProduced 	=  5;
 		player.wood 			= 30;
 		player.stone 			= 30;
 		player.metal 			= 35;
-		player.product   		= 0;
-		player.productionTime   = 0;
+		player.product   		=  0;
+		player.productionTime   =  0;
 		player.missiles         = 10;
+		player.missileLoad      =  0;
 
 		//Building
 		building.life			= 15;
@@ -69,6 +70,7 @@ public static string winner = "";
 		building.stone 			=  5;
 		building.product   		=  0;
 		building.productionTime =  0;
+		building.missileLoad	=  0;
 
 		//Energy Plant
 		energyPlant.life      		= 15;
@@ -81,6 +83,7 @@ public static string winner = "";
 		energyPlant.stone 			=  5;
 		energyPlant.product   		=  0;
 		energyPlant.productionTime  =  0;
+		energyPlant.missileLoad		=  0;
 
 		//WoodMill
 		woodMill.life      		= 20;
@@ -93,6 +96,7 @@ public static string winner = "";
 		woodMill.stone 			=  2;
 		woodMill.product   		=  1;
 		woodMill.productionTime =  3;
+		woodMill.missileLoad	=  0;
 
 		//Quarry
 		quarry.life      		= 20;
@@ -105,6 +109,7 @@ public static string winner = "";
 		quarry.stone 			=  3;
 		quarry.product   		=  1;
 		quarry.productionTime   =  3;
+		quarry.missileLoad	    =  0;
 
 		//Metal Factory
 		metalFactory.life      		= 20;
@@ -117,6 +122,7 @@ public static string winner = "";
 		metalFactory.stone 			=  3;
 		metalFactory.product   		=  1;
 		metalFactory.productionTime =  3;
+		metalFactory.missileLoad	=  0;
 
 		//Missile Launcher
 		missileLauncher.life      		= 20;
@@ -129,6 +135,7 @@ public static string winner = "";
 		missileLauncher.stone 			=  3;
 		missileLauncher.product   		=  1;
 		missileLauncher.productionTime  =  0;
+		missileLauncher.missileLoad		=  0;
 
 		//Factory
 		factory.life      		= 20;
@@ -141,6 +148,8 @@ public static string winner = "";
 		factory.stone 			=  3;
 		factory.product   		=  1;
 		factory.productionTime  =  4;
+		factory.missileLoad		=  0;
+		factory.missileLoad		=  0;
 
 		//Missile Defender
 		missileDefender.life      		= 20;
@@ -153,6 +162,7 @@ public static string winner = "";
 		missileDefender.stone 			=  3;
 		missileDefender.product   		=  1;
 		missileDefender.productionTime  =  0;
+		missileDefender.missileLoad		=  0;
 
 		//Lab
 		lab.life      		= 20;
@@ -165,6 +175,7 @@ public static string winner = "";
 		lab.stone 			=  3;
 		lab.product   		=  1;
 		lab.productionTime  =  0;
+		lab.missileLoad		=  0;
 	}
 #endregion
 
