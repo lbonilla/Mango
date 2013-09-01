@@ -51,12 +51,12 @@ public static string winner = "";
 		player.worker     		=  0;
 		player.energyRequired 	=  0;
 		player.energyProduced 	=  5;
-		player.wood 			= 30;
-		player.stone 			= 30;
-		player.metal 			= 35;
+		player.wood 			= 40;
+		player.stone 			= 50;
+		player.metal 			= 55;
 		player.product   		=  0;
 		player.productionTime   =  0;
-		player.missiles         = 10;
+		player.missiles         = 300;
 		player.missileLoad      =  0;
 
 		//Building

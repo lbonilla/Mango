@@ -23,6 +23,8 @@ public class MissileLauncher : Facility {
 	public GameObject missile;
 	public GameObject cannon1;
 	public GameObject cannon2;
+	public GameObject cannon3;
+	public GameObject cannon4;
 #endregion
 
 #region Private Variables
@@ -85,7 +87,7 @@ public class MissileLauncher : Facility {
 	private void AddMissile(){
 		if(Owner.Missiles > 0){
 			canAddMissile = false;
-			Owner.Missiles -= 1;	
+			Owner.Missiles -= 4;	
 			Owner.UpdateData();		
 
 			GameObject m;
@@ -95,6 +97,9 @@ public class MissileLauncher : Facility {
 				case Players.Player1:
 					pos.y += 1;
 					m = Instantiate(missile, cannon1.transform.position, new Quaternion(0, 0, 0,0)) as GameObject;
+					m = Instantiate(missile, cannon2.transform.position, new Quaternion(0, 0, 0,0)) as GameObject;
+					m = Instantiate(missile, cannon3.transform.position, new Quaternion(0, 0, 0,0)) as GameObject;
+					m = Instantiate(missile, cannon4.transform.position, new Quaternion(0, 0, 0,0)) as GameObject;
 					m.name = "p1m";
 				break;
 				case Players.Player2:
