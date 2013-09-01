@@ -5,17 +5,17 @@
       <File FileName="Assets/Scripts/GameManagers/SoundManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Game/EnergyPlant.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Game/MissileLauncher.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Game/MissileDefender.cs" Line="67" Column="1" />
+      <File FileName="Assets/Scripts/Game/MissileDefender.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Game/Missile.cs" Line="1" Column="1" />
-      <File FileName="Assets/HUDFPS.cs" Line="21" Column="20" />
-      <File FileName="Assets/Scripts/GameManagers/InGameManager.cs" Line="847" Column="38" />
-      <File FileName="Assets/Scripts/Game/Data.cs" Line="59" Column="28" />
-      <File FileName="Assets/Scripts/Game/Player.cs" Line="128" Column="15" />
+      <File FileName="Assets/HUDFPS.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameManagers/InGameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Game/Data.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Game/Player.cs" Line="109" Column="14" />
       <File FileName="Assets/Scripts/Game/Facility.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Game/Building.cs" Line="54" Column="29" />
-      <File FileName="Assets/Scripts/Game/ProductionTimer.cs" Line="12" Column="29" />
-      <File FileName="Assets/Scripts/MVC/IGMViewManager.cs" Line="51" Column="49" />
-      <File FileName="Assets/Scripts/MVC/IGMControllerManager.cs" Line="78" Column="81" />
+      <File FileName="Assets/Scripts/Game/Building.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Game/ProductionTimer.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/MVC/IGMViewManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/MVC/IGMControllerManager.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
