@@ -26,18 +26,20 @@ public class InGameManager : MonoBehaviour {
 	
 	private IGMControllerManager controllerManager;
 	private bool canAddMissile = true;
-	private Player player1;
-	private Player player2;
+	public Player player1;
+	public Player player2;
 	
 
 	// Use this for initialization
 	void Start () {
 		Data data = new Data();
 		controllerManager = GameObject.FindGameObjectWithTag("IGMControllerManager").GetComponent<IGMControllerManager>();
-		player1 = new Player(this);
+		//player1 = new Player(this);
 		player1.Type = Players.Player1;
-		player2 = new Player(this);
+		player1.InitPlayer();
+		//player2 = new Player(this);
 		player2.Type = Players.Player2;
+		player2.InitPlayer();
 		Invoke("UpdatePlayersOnInit", 0.1f);
 	}
 	

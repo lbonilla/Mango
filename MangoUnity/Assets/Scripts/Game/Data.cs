@@ -56,7 +56,7 @@ public static string winner = "";
 		player.metal 			= 55;
 		player.product   		=  0;
 		player.productionTime   =  0;
-		player.missiles         =  5;
+		player.missiles         =100;
 		player.missileLoad      =  0;
 
 		//Building
