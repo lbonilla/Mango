@@ -35,18 +35,13 @@ public class MissileDefender : Facility {
 	private float range = 12.0f;
 	private string missileName;
 	private float shootingAngle;
+
+	private float rotationSpeed = 0.1f;
+	private float rotationValue = 0;
 #endregion
 
 #region Properties
-
-	public string MissileName {
-		get {
-			return missileName;
-		}
-		set {
-			missileName = value;
-		}
-	}
+	public string MissileName { get { return missileName; } set { missileName = value; }}
 #endregion
 
 // if this class inherits from MonoBehaviour remove constructor and deconstructor.
@@ -78,7 +73,7 @@ public class MissileDefender : Facility {
 
 		RaycastHit hit;
 	  	Vector3 fwd = top.transform.TransformDirection(Vector3.up);
-					
+
 	  	if (Physics.Raycast(top.transform.position, fwd, out hit, range)){
 	    	//print("There is something in front of the object!");
 	    	Debug.DrawLine(top.transform.position, hit.collider.gameObject.transform.position, Color.red);
@@ -86,18 +81,14 @@ public class MissileDefender : Facility {
 				//Once a missile is detected follow and shot
 				//top.animation.Stop();
 				//if(missile == null){
-					Debug.Log(hit.collider.gameObject.name);
+					//Debug.Log(hit.collider.gameObject.name);
 					missile = hit.collider.gameObject.GetComponent<Missile>();
 					//Debug.Log("Rotation Z: "+top.transform.rotation.z);
-					
 					ShootBullet();
-					//shooting = true;
-					//Invoke("ShootBullet", 0.1f);
 				//}
 			}			
 	  	}
 //		ShootBullet();
-		
 	  	//Debug.DrawLine(top.transform.position, fwd, Color.green);
 	}
 
@@ -119,7 +110,6 @@ public class MissileDefender : Facility {
 #endregion
 
 #region Game Methods
-
 	override public void ReduceLife(float value){
 		this.Life  -= value;
 		if(this.Life  < 0 ){
@@ -166,7 +156,7 @@ public class MissileDefender : Facility {
 		}
 		
 		
-		Invoke("Reset", 1.0f);
+		Invoke("Reset", 0.01f);
 	}
 		
 	private void Reset(){

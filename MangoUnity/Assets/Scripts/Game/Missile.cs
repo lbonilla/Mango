@@ -23,16 +23,14 @@ public class Missile : MonoBehaviour {
 #endregion
 
 #region Private Variables
-	public float CurveSpeed = 5;
-	public float CurveRange = 1;
-    public float MoveSpeed = 1;
+	public float curveSpeed = 5;
+	public float curveRange = 1;
+    public float speed = 0.0001f;
     private float fTime = 0;
 	private float fSpeed = 0;
-    private Vector3 lastPos = Vector3.zero;
 	private float randonDirection;
-
-	private float destructionPower = 7.0f;
-	private float speed = 2.0f;
+	private float destructionPower = 2f;
+	//private Vector3 lastPos = Vector3.zero;
 #endregion
 
 #region Properties
@@ -46,30 +44,31 @@ public class Missile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		lastPos = transform.position;
-        CurveRange = Random.Range(2, 5);
-		MoveSpeed = Random.Range(8, 10);
-		randonDirection = Random.Range(0.1f, 1f);
+		//lastPos = transform.position;
+		curveSpeed = Random.Range(8, 10);
+        curveRange = Random.Range(0.01f, 0.03f);
+		speed = Random.Range(0.015f, 0.02f);
+		randonDirection = Random.Range(0.1f, 0.3f);//scatters missiles on open range
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//TODO: add animation 
+
 		//this.gameObject.transform.Translate (0, speed * Time.deltaTime, 0);	
- 		lastPos = transform.position;
+ 		//lastPos = transform.position;//to draw reference line
 		
-       	fTime += (Time.deltaTime * CurveSpeed) * randonDirection;
-		fSpeed += Time.deltaTime * MoveSpeed;
+       	fTime += (Time.deltaTime * curveSpeed) * randonDirection;
+		fSpeed += Time.deltaTime * speed;
 	
-       	Vector3 vSin = new Vector3((Mathf.Sin(fTime)* CurveRange), fSpeed, 0);
+       	Vector3 vSin = new Vector3((Mathf.Sin(fTime)* curveRange), fSpeed, 0);
    
-       	transform.position += vSin * Time.deltaTime;
+       	//transform.position += vSin * Time.deltaTime;
+		transform.Translate(vSin);
  
-       	Debug.DrawLine(lastPos, transform.position, Color.green, 100);
+       	//Debug.DrawLine(lastPos, transform.position, Color.green, 100);
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		
 		//GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().PlayAudio("missionExplotion");
 	}
 

@@ -48,7 +48,7 @@ public class IGMViewManager : MonoBehaviour {
 		if(Screen.height == 2048){
 			fparams.AddResolutionLevel (Screen.width, 2.0f, 1.0f, "");
 		}else{
-			fparams.AddResolutionLevel (Screen.width, 1.0f, 1.0f, "");
+			fparams.AddResolutionLevel (Screen.width, 0.5f, 1.0f, "");
 		}
 
 		fparams.origin = new Vector2 (0, 0.5f);

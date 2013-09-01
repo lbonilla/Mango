@@ -96,15 +96,18 @@ public class MissileLauncher : Facility {
 			switch(Owner.Type){		
 				case Players.Player1:
 					pos.y += 1;
-					m = Instantiate(missile, cannon1.transform.position, new Quaternion(0, 0, 0,0)) as GameObject;
-					m = Instantiate(missile, cannon2.transform.position, new Quaternion(0, 0, 0,0)) as GameObject;
-					m = Instantiate(missile, cannon3.transform.position, new Quaternion(0, 0, 0,0)) as GameObject;
-					m = Instantiate(missile, cannon4.transform.position, new Quaternion(0, 0, 0,0)) as GameObject;
+					m = Instantiate(missile, cannon1.transform.position, new Quaternion(0, 0, 0, 0)) as GameObject;
+					m = Instantiate(missile, cannon2.transform.position, new Quaternion(0, 0, 0, 0)) as GameObject;
+					m = Instantiate(missile, cannon3.transform.position, new Quaternion(0, 0, 0, 0)) as GameObject;
+					m = Instantiate(missile, cannon4.transform.position, new Quaternion(0, 0, 0, 0)) as GameObject;
 					m.name = "p1m";
 				break;
 				case Players.Player2:
 					pos.y -= 1;
 					m = Instantiate(missile, cannon1.transform.position, new Quaternion(0, 0, 180,0)) as GameObject;
+					m = Instantiate(missile, cannon2.transform.position, new Quaternion(0, 0, 180, 0)) as GameObject;
+					m = Instantiate(missile, cannon3.transform.position, new Quaternion(0, 0, 180, 0)) as GameObject;
+					m = Instantiate(missile, cannon4.transform.position, new Quaternion(0, 0, 180, 0)) as GameObject;
 					m.name = "p2m";
 				break;
 			

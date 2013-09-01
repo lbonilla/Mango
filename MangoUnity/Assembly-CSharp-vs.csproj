@@ -91,6 +91,7 @@
      <Compile Include="Assets\Futile\Rix\RXUtils.cs" />
      <Compile Include="Assets\Futile\Rix\RXWatcher.cs" />
      <Compile Include="Assets\Futile\ThirdParty\MiniJson.cs" />
+     <Compile Include="Assets\HUDFPS.cs" />
      <Compile Include="Assets\Move.cs" />
      <Compile Include="Assets\Scripts\Game\Building.cs" />
      <Compile Include="Assets\Scripts\Game\Bullet.cs" />
@@ -109,6 +110,7 @@
      <Compile Include="Assets\Scripts\Game\RotateCube.cs" />
      <Compile Include="Assets\Scripts\Game\WoodMill.cs" />
      <Compile Include="Assets\Scripts\Game\World.cs" />
+     <Compile Include="Assets\Scripts\Game\WorldLimit.cs" />
      <Compile Include="Assets\Scripts\Game\WorldSlot.cs" />
      <Compile Include="Assets\Scripts\GameManagers\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameManagers\InGameManager.cs" />
