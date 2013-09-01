@@ -20,6 +20,9 @@ public class Lab : Facility {
 #endregion
 
 #region Public Variables
+	private bool isOn = true;
+	public Texture onTexture;
+ 	public Texture offTexture;
 #endregion
 
 #region Private Variables
@@ -47,24 +50,27 @@ public class Lab : Facility {
 #endregion
 
 #region Unity Methods
-
-	// Use this for initialization
-	void Start () {
+	override public void OnUpdate(){	
 	
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void OnMouseDown(){
+		isOn = !isOn;
+		if(isOn){
+			gameObject.transform.FindChild("lab_mod").renderer.material.mainTexture = onTexture;
+		}else{
+			gameObject.transform.FindChild("lab_mod").renderer.material.mainTexture = offTexture;
+		}
 	}
 
+
+	void OnTriggerEnter(Collider other) {
+		ReduceLife(other.gameObject.GetComponent<Missile>().DestructionPower);
+		Destroy(other.gameObject);		
+    }
 #endregion
 
-#region Game Methods
-	override public void OnUpdate(){
-	
-	}
-	
+#region Game Methods	
 	override public void ReduceLife(float value){
 		this.Life  -= value;
 		if(this.Life  < 0 ){
@@ -72,11 +78,6 @@ public class Lab : Facility {
 			Destroy(this.gameObject);
 		}
 	}
-
-	void OnTriggerEnter(Collider other) {
-		ReduceLife(other.gameObject.GetComponent<Missile>().DestructionPower);
-		Destroy(other.gameObject);		
-    }
 #endregion
 
 }

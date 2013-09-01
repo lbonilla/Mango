@@ -23,7 +23,9 @@ public class EnergyPlant : Facility {
 #endregion
 
 #region Private Variables
-	
+	private bool isOn = true;
+	public Texture onTexture;
+ 	public Texture offTexture;
 #endregion
 
 #region Properties
@@ -50,13 +52,26 @@ public class EnergyPlant : Facility {
 #endregion
 
 #region Unity Methods
+		override public void OnUpdate(){
+			
+		}
+	
+		void OnMouseDown(){
+			isOn = !isOn;
+			if(isOn){
+				gameObject.transform.FindChild("energyPlant_mod").renderer.material.mainTexture = onTexture;
+			}else{
+				gameObject.transform.FindChild("energyPlant_mod").renderer.material.mainTexture = offTexture;
+			}
+		}
+
+		void OnTriggerEnter(Collider other) {
+			ReduceLife(other.gameObject.GetComponent<Missile>().DestructionPower);	
+			Destroy(other.gameObject);	
+	    }
 #endregion
 
 #region Game Methods
-	override public void OnUpdate(){
-		
-	}
-	
 	override public void ReduceLife(float value){
 		this.Life -= value;
 		if(this.Life  < 0 ){
@@ -64,11 +79,5 @@ public class EnergyPlant : Facility {
 			Destroy(this.gameObject);
 		}
 	}
-
-	void OnTriggerEnter(Collider other) {
-		ReduceLife(other.gameObject.GetComponent<Missile>().DestructionPower);	
-		Destroy(other.gameObject);	
-    }
 #endregion
-
 }

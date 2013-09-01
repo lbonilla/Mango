@@ -20,9 +20,12 @@ public class Quarry : Facility {
 #endregion
 
 #region Public Variables
+	public Texture onTexture;
+ 	public Texture offTexture;
 #endregion
 
 #region Private Variables
+	private bool isOn = true;
 	private ProductionTimer timer;
 #endregion
 
@@ -50,18 +53,19 @@ public class Quarry : Facility {
 #endregion
 
 #region Unity Methods
-#endregion
-
-#region Game Methods
 	override public void OnUpdate(){
-		timer.Tick();
+		if(isOn){
+			timer.Tick();
+		}
 	}
 	
-	override public void ReduceLife(float value){
-		this.Life  -= value;
-		if(this.Life  < 0 ){
-			GameObject.FindGameObjectWithTag("InGameManager").GetComponent<InGameManager>().RemoveFacility(this, Owner);
-			Destroy(this.gameObject);
+	void OnMouseDown(){
+		isOn = !isOn;
+		
+		if(isOn){
+			gameObject.transform.FindChild("quarry_mod").renderer.material.mainTexture = onTexture;
+		}else{
+			gameObject.transform.FindChild("quarry_mod").renderer.material.mainTexture = offTexture;
 		}
 	}
 
@@ -69,6 +73,17 @@ public class Quarry : Facility {
 		ReduceLife(other.gameObject.GetComponent<Missile>().DestructionPower);	
 		Destroy(other.gameObject);	
     }
+
+#endregion
+
+#region Game Methods
+	override public void ReduceLife(float value){
+		this.Life  -= value;
+		if(this.Life  < 0 ){
+			GameObject.FindGameObjectWithTag("InGameManager").GetComponent<InGameManager>().RemoveFacility(this, Owner);
+			Destroy(this.gameObject);
+		}
+	}
 
 	override public void CompletedProduct(){
 		timer.Play(); 

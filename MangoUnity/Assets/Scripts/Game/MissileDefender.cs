@@ -24,9 +24,12 @@ public class MissileDefender : Facility {
 	public GameObject cannon1;
 	public GameObject cannon2;
 	public GameObject bullet;
+	public Texture onTexture;
+ 	public Texture offTexture;
 #endregion
 
 #region Private Variables
+	private bool isOn = true;
 	private Missile missile = null;
 	private bool shooting = false;
 	private float range = 12.0f;
@@ -67,20 +70,15 @@ public class MissileDefender : Facility {
 #endregion
 
 #region Unity Methods
-#endregion
-
-#region Game Methods
 	override public void OnUpdate(){
 		
-		if(shooting){
+		if(shooting || !isOn){
 			return;
 		}
 
 		RaycastHit hit;
 	  	Vector3 fwd = top.transform.TransformDirection(Vector3.up);
-			
-	
-		
+					
 	  	if (Physics.Raycast(top.transform.position, fwd, out hit, range)){
 	    	//print("There is something in front of the object!");
 	    	Debug.DrawLine(top.transform.position, hit.collider.gameObject.transform.position, Color.red);
@@ -102,6 +100,25 @@ public class MissileDefender : Facility {
 		
 	  	//Debug.DrawLine(top.transform.position, fwd, Color.green);
 	}
+
+	void OnMouseDown(){
+		isOn = !isOn;
+		if(isOn){
+			top.transform.FindChild("missileDefender_mod").renderer.material.mainTexture = onTexture;
+			top.animation.Play();
+		}else{
+			top.transform.FindChild("missileDefender_mod").renderer.material.mainTexture = offTexture;
+			top.animation.Stop();
+		}
+	}
+
+	void OnTriggerEnter(Collider other) {
+		ReduceLife(other.gameObject.GetComponent<Missile>().DestructionPower);		
+		Destroy(other.gameObject);
+    }
+#endregion
+
+#region Game Methods
 
 	override public void ReduceLife(float value){
 		this.Life  -= value;

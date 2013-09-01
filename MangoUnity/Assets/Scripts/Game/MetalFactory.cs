@@ -20,10 +20,13 @@ public class MetalFactory : Facility {
 #endregion
 
 #region Public Variables
+	public Texture onTexture;
+ 	public Texture offTexture;
 #endregion
 
 #region Private Variables
 	private ProductionTimer timer;
+	private bool isOn = true;
 #endregion
 
 #region Properties
@@ -49,13 +52,28 @@ public class MetalFactory : Facility {
 #endregion
 
 #region Unity Methods
+	override public void OnUpdate(){
+		if(isOn){
+			timer.Tick();
+		}
+	}
+	
+	void OnMouseDown(){
+		isOn = !isOn;
+		if(isOn){
+			gameObject.transform.FindChild("metalFactory_mod").renderer.material.mainTexture = onTexture;
+		}else{
+			gameObject.transform.FindChild("metalFactory_mod").renderer.material.mainTexture = offTexture;
+		}
+	}
+
+	void OnTriggerEnter(Collider other) {
+		ReduceLife(other.gameObject.GetComponent<Missile>().DestructionPower);		
+		Destroy(other.gameObject);
+    }
 #endregion
 
 #region Game Methods
-	override public void OnUpdate(){
-		timer.Tick();
-	}
-	
 	override public void ReduceLife(float value){
 		this.Life  -= value;
 		print(this.Life);
@@ -64,17 +82,10 @@ public class MetalFactory : Facility {
 			Destroy(this.gameObject);
 		}
 	}
-
-	void OnTriggerEnter(Collider other) {
-		ReduceLife(other.gameObject.GetComponent<Missile>().DestructionPower);		
-		Destroy(other.gameObject);
-    }
-
 	override public void CompletedProduct(){
 		timer.Play(); 
 		this.Owner.Metal += this.Product;
 		this.Owner.UpdateData();
 	}
 #endregion
-
 }
