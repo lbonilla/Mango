@@ -45,19 +45,16 @@ public class InGameManager : MonoBehaviour {
 		UpdatePlayer(player1);
 		UpdatePlayer(player2);
 
-		AddMissileLauncher(Players.Player1);
 		AddEnergyPlant(Players.Player1);
+		AddBuilding(Players.Player1);
 		AddWoodMill(Players.Player1);
 		AddQuarry(Players.Player1);
 		AddMetalFactory(Players.Player1);
 		
-		AddMissileDefender(Players.Player2);
-		AddMissileDefender(Players.Player2);
-		AddMissileDefender(Players.Player2);
+		AddEnergyPlant(Players.Player2);
 		AddBuilding(Players.Player2);
-		AddMissileDefender(Players.Player2);
 		AddWoodMill(Players.Player2);
-		AddMissileDefender(Players.Player2);
+		AddQuarry(Players.Player2);
 		AddMetalFactory(Players.Player2);
 		
 	}
