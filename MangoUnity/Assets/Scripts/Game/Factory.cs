@@ -73,20 +73,13 @@ public class Factory : Facility {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		ReduceLife(other.gameObject.GetComponent<Missile>().DestructionPower);		
+		Owner.ReceiveDamage(this,other.gameObject.GetComponent<Missile>().DestructionPower);
 		Destroy(other.gameObject);
     }
 
 #endregion
 
-#region Game Methods
-	override public void ReduceLife(float value){
-		this.Life  -= value;
-		if(this.Life  < 0 ){
-			GameObject.FindGameObjectWithTag("InGameManager").GetComponent<InGameManager>().RemoveFacility(this, Owner);
-			Destroy(this.gameObject);
-		}
-	}	
+#region Game Methods	
 
 	override public void CompletedProduct(){
 		Produce();

@@ -49,7 +49,7 @@ public class MissileLauncher : Facility {
 	}
 #endregion
 	void OnTriggerEnter(Collider other) {
-		ReduceLife(other.gameObject.GetComponent<Missile>().DestructionPower);		
+		Owner.ReceiveDamage(this,other.gameObject.GetComponent<Missile>().DestructionPower);
 		Destroy(other.gameObject);
     }
 
@@ -75,14 +75,6 @@ public class MissileLauncher : Facility {
 	
 	}
 	
-	override public void ReduceLife(float value){
-		this.Life  -= value;
-		print(this.Life);
-		if(this.Life  < 0 ){
-			GameObject.FindGameObjectWithTag("InGameManager").GetComponent<InGameManager>().RemoveFacility(this, Owner);
-			Destroy(this.gameObject);
-		}
-	}
 
 	private void AddMissile(){
 		if(Owner.Missiles > 0){

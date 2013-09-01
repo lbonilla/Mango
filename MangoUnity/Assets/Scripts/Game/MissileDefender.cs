@@ -104,19 +104,12 @@ public class MissileDefender : Facility {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		ReduceLife(other.gameObject.GetComponent<Missile>().DestructionPower);		
+		Owner.ReceiveDamage(this,other.gameObject.GetComponent<Missile>().DestructionPower);
 		Destroy(other.gameObject);
     }
 #endregion
 
 #region Game Methods
-	override public void ReduceLife(float value){
-		this.Life  -= value;
-		if(this.Life  < 0 ){
-			Destroy(this.gameObject);
-			//TODO Tell IGM I was destroy
-		}
-	}
 
 	private void ShootBullet(){
 		shooting = true;

@@ -68,20 +68,12 @@ public class MetalFactory : Facility {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		ReduceLife(other.gameObject.GetComponent<Missile>().DestructionPower);		
+		Owner.ReceiveDamage(this,other.gameObject.GetComponent<Missile>().DestructionPower);
 		Destroy(other.gameObject);
     }
 #endregion
 
 #region Game Methods
-	override public void ReduceLife(float value){
-		this.Life  -= value;
-		print(this.Life);
-		if(this.Life  < 0 ){
-			GameObject.FindGameObjectWithTag("InGameManager").GetComponent<InGameManager>().RemoveFacility(this, Owner);
-			Destroy(this.gameObject);
-		}
-	}
 	override public void CompletedProduct(){
 		timer.Play(); 
 		this.Owner.Metal += this.Product;
