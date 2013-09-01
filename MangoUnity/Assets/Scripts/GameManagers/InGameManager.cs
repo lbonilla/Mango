@@ -45,29 +45,37 @@ public class InGameManager : MonoBehaviour {
 		UpdatePlayer(player1);
 		UpdatePlayer(player2);
 
-		AddBuilding(Players.Player1);
-		AddEnergyPlant(Players.Player1);
-		AddWoodMill(Players.Player1);
-		AddQuarry(Players.Player1);
-		AddMetalFactory(Players.Player1);
+		//AddBuilding(Players.Player1);
+		//AddEnergyPlant(Players.Player1);
+		//AddWoodMill(Players.Player1);
+		//AddQuarry(Players.Player1);
+		//AddMetalFactory(Players.Player1);
+		AddMissileLauncher(Players.Player1);
+		
 
 		AddBuilding(Players.Player2);
 		AddEnergyPlant(Players.Player2);
+		AddBuilding(Players.Player2);
+		AddBuilding(Players.Player2);
+		AddBuilding(Players.Player2);
 		AddWoodMill(Players.Player2);
+		AddBuilding(Players.Player2);
 		AddQuarry(Players.Player2);
 		AddMetalFactory(Players.Player2);
 		
 	}
 
 	private void SetWinner (){
+		
 
-		if(player1.Citizens > 0){
+		/*(if(player1.Citizens > 0){
 			EndGame();	
 			Data.winner = "Player 1 Wins!";
 		}else if(player2.Citizens > 0){
 			EndGame();
 			Data.winner = "Player 2 Wins!";
 		}
+		*/
 	}
 
 	private void EndGame () {
@@ -104,7 +112,7 @@ public class InGameManager : MonoBehaviour {
 					&& player1.Stone >= Data.woodMill.stone
 					&& player1.Metal >= Data.woodMill.metal
 					&& ((player1.EnergyAvailable - Data.woodMill.energyRequired) >= 0)
-					&& ((player1.Citizens - Data.woodMill.worker) >= 0)) {
+					&& ((player1.CitizensAvailable - Data.woodMill.worker) >= 0)) {
 					controllerManager.SetButtonState(player1, "wood", true);
 				}else{
 					controllerManager.SetButtonState(player1, "wood", false);
@@ -115,7 +123,7 @@ public class InGameManager : MonoBehaviour {
 					&& player1.Stone >= Data.quarry.stone
 					&& player1.Metal >= Data.quarry.metal
 					&& ((player1.EnergyAvailable - Data.quarry.energyRequired) >= 0)
-					&& ((player1.Citizens - Data.quarry.worker) >= 0)) {
+					&& ((player1.CitizensAvailable - Data.quarry.worker) >= 0)) {
 					controllerManager.SetButtonState(player1, "stone", true);
 				}else{
 					controllerManager.SetButtonState(player1, "stone", false);
@@ -126,7 +134,7 @@ public class InGameManager : MonoBehaviour {
 					&& player1.Stone >= Data.metalFactory.stone
 					&& player1.Metal >= Data.metalFactory.metal
 					&& ((player1.EnergyAvailable - Data.metalFactory.energyRequired) >= 0)
-					&& ((player1.Citizens - Data.metalFactory.worker) >= 0)) {
+					&& ((player1.CitizensAvailable - Data.metalFactory.worker) >= 0)) {
 					controllerManager.SetButtonState(player1, "metal", true);
 				}else{
 					controllerManager.SetButtonState(player1, "metal", false);
@@ -137,7 +145,7 @@ public class InGameManager : MonoBehaviour {
 					&& player1.Stone >= Data.missileLauncher.stone
 					&& player1.Metal >= Data.missileLauncher.metal
 					&& ((player1.EnergyAvailable - Data.missileLauncher.energyRequired) >= 0)
-					&& ((player1.Citizens - Data.missileLauncher.worker) >= 0)) {	
+					&& ((player1.CitizensAvailable - Data.missileLauncher.worker) >= 0)) {	
 					controllerManager.SetButtonState(player1, "missile", true);
 				}else{
 					controllerManager.SetButtonState(player1, "missile", false);
@@ -148,7 +156,7 @@ public class InGameManager : MonoBehaviour {
 					&& player1.Stone >= Data.factory.stone
 					&& player1.Metal >= Data.factory.metal
 					&& ((player1.EnergyAvailable - Data.factory.energyRequired) >= 0)
-					&& ((player1.Citizens - Data.factory.worker) >= 0)) {
+					&& ((player1.CitizensAvailable - Data.factory.worker) >= 0)) {
 					controllerManager.SetButtonState(player1, "factory", true);
 				}else{
 					controllerManager.SetButtonState(player1, "factory", false);
@@ -159,7 +167,7 @@ public class InGameManager : MonoBehaviour {
 					&& player1.Stone >= Data.missileDefender.stone
 					&& player1.Metal >= Data.missileDefender.metal
 					&& ((player1.EnergyAvailable - Data.missileDefender.energyRequired) >= 0)
-					&& ((player1.Citizens - Data.missileDefender.worker) >= 0)) {
+					&& ((player1.CitizensAvailable - Data.missileDefender.worker) >= 0)) {
 					controllerManager.SetButtonState(player1, "defender", true);
 				}else{
 					controllerManager.SetButtonState(player1, "defender", false);
@@ -170,7 +178,7 @@ public class InGameManager : MonoBehaviour {
 					&& player1.Stone >= Data.lab.stone
 					&& player1.Metal >= Data.lab.metal
 					&& ((player1.EnergyAvailable - Data.lab.energyRequired) >= 0)
-					&& ((player1.Citizens - Data.lab.worker) >= 0)) {
+					&& ((player1.CitizensAvailable - Data.lab.worker) >= 0)) {
 					controllerManager.SetButtonState(player1, "lab", true);
 				}else{
 					controllerManager.SetButtonState(player1, "lab", false);
@@ -193,7 +201,7 @@ public class InGameManager : MonoBehaviour {
 				if(player2.Wood >= Data.energyPlant.wood 
 					&& player2.Stone >= Data.energyPlant.stone 
 					&& player2.Metal >= Data.energyPlant.metal 
-					&& (player2.Citizens - Data.energyPlant.worker >= 0)){
+					&& (player2.CitizensAvailable - Data.energyPlant.worker >= 0)){
 					controllerManager.SetButtonState(player2, "energy", true);
 				}else{
 					controllerManager.SetButtonState(player2, "energy", false);
@@ -275,7 +283,6 @@ public class InGameManager : MonoBehaviour {
 		}
 	}
 
-
 	// Update is called once per frame
 	void Update () {
 		
@@ -314,8 +321,9 @@ public class InGameManager : MonoBehaviour {
 					go = Instantiate(building, slot.Position, Quaternion.identity) as GameObject;
 					go.name = "p1_building_pref" + Facility.id;		
 					go.transform.Rotate(new Vector3(0, 0, 1), slot.Angle);
-					go.gameObject.transform.parent = p1World.transform;
-					AddFacility(go.GetComponent<Facility>(), pPlayer);
+					Facility fac=go.GetComponent<Facility>();
+					player1.AddedBuilding(fac.Citizen);		
+					AddFacility(fac, pPlayer);
 				}
 			}
 			break;
@@ -338,7 +346,9 @@ public class InGameManager : MonoBehaviour {
 					go.name = "p2_building_pref" + Facility.id;				
 					go.transform.Rotate(new Vector3(0, 0, 1), slot.Angle);
 					go.gameObject.transform.parent = p2World.transform;
-					AddFacility(go.GetComponent<Facility>(), pPlayer);
+					Facility fac=go.GetComponent<Facility>();
+					player2.AddedBuilding(fac.Citizen);			
+					AddFacility(fac, pPlayer);
 				}
 			}
 			break;
@@ -761,19 +771,19 @@ public class InGameManager : MonoBehaviour {
 		switch(pPlayer){
 			case Players.Player1:
 				pFacility.Owner = player1;
-				player1.Citizens 		+= pFacility.Citizen;
-				player1.Citizens    	-= pFacility.Worker;
+				player1.CitizensAvailable 		+= pFacility.Citizen;
+				player1.CitizensAvailable    	-= pFacility.Worker;
 				player1.EnergyAvailable += pFacility.EnergyProduced;
 				player1.EnergyAvailable -= pFacility.EnergyRequired;
 				player1.Wood 			-= pFacility.Wood;
 				player1.Metal    		-= pFacility.Metal;
 				player1.Stone    		-= pFacility.Stone;
-				UpdatePlayer(player1);
+				UpdatePlayer(player1);				
 			break;
 			case Players.Player2:
 				pFacility.Owner = player2;
-				player2.Citizens 		+= pFacility.Citizen;
-				player2.Citizens    	-= pFacility.Worker;
+				player2.CitizensAvailable 		+= pFacility.Citizen;
+				player2.CitizensAvailable    	-= pFacility.Worker;
 				player2.EnergyAvailable += pFacility.EnergyProduced;
 				player2.EnergyAvailable -= pFacility.EnergyRequired;
 				player2.Wood 			-= pFacility.Wood;
@@ -792,8 +802,8 @@ public class InGameManager : MonoBehaviour {
 		
 		switch(pPlayer.Type){
 			case Players.Player1:
-				player1.Citizens 		-= pFacility.Citizen;
-				player1.Citizens    	+= pFacility.Worker;
+				player1.CitizensAvailable 		-= pFacility.Citizen;
+				player1.CitizensAvailable    	+= pFacility.Worker;
 				player1.EnergyAvailable	 -= pFacility.EnergyProduced;
 				player1.EnergyAvailable  += pFacility.EnergyRequired;
 				//player1.Wood 			+= pFacility.Wood;
@@ -801,10 +811,11 @@ public class InGameManager : MonoBehaviour {
 				//player1.Stone    		+= pFacility.Stone;
 				UpdatePlayer(player1);
 				
+			
 			break;
 			case Players.Player2:
-				player2.Citizens 		 -= pFacility.Citizen;
-				player2.Citizens    	 += pFacility.Worker;
+				player2.CitizensAvailable -= pFacility.Citizen;
+				player2.CitizensAvailable += pFacility.Worker;
 				player2.EnergyAvailable	 -= pFacility.EnergyProduced;
 				player2.EnergyAvailable  += pFacility.EnergyRequired;
 				//player2.Wood 			+= pFacility.Wood;
@@ -832,5 +843,10 @@ public class InGameManager : MonoBehaviour {
 	
 	public void UpdatePlayer(Player pPlayer){
 		controllerManager.updateViewLabelText(pPlayer);
+	}
+	
+	public void ReduceCitizensAvailable(Player pPlayer, int pCantToRemove){
+	
+				
 	}
 }

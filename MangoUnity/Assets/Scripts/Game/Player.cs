@@ -9,7 +9,7 @@ using System.Collections.Generic;
 // Email: 
 // Copyright (C) 2013,  (R). All rights reserved.  
 
-public class Player {
+public class Player:MonoBehaviour {
 #region Enums
 
 #endregion
@@ -24,7 +24,9 @@ public class Player {
 #endregion
 
 #region Private Variables
-	private int citizens;	
+	private int citizensToReduce;
+	private int citizensLimit;	
+	private int citizensAvailable;	
 	private int energyRequired;
 	private int energyAvailable;
 	private int wood;
@@ -33,10 +35,13 @@ public class Player {
 	private int missiles;
 	private Players type;
 	private InGameManager inGameManager;
+
 #endregion
 
 #region Properties
-	public int Citizens { get { return citizens; } set { citizens = value; }}
+	public int CitizensAvailable{get{return citizensAvailable; } set{citizensAvailable = value;}}		
+	public int CitizensLimit{get{return citizensLimit;} set{citizensLimit=value;}}
+	public int CitizensToReduce{get{return citizensToReduce;} set {citizensToReduce= value;}}
 	public int EnergyRequired { get { return energyRequired; } set { energyRequired = value; } }
 	public int EnergyAvailable { get { return energyAvailable; } set { energyAvailable = value; }}
 	public int Wood { get { return wood; } set { wood = value; }}
@@ -45,31 +50,81 @@ public class Player {
 	public int Missiles { get { return missiles; } set { missiles = value; } }
 	public Players Type { get { return type; } set { type = value; } }
 	public InGameManager InGameManager { get { return inGameManager; } set { inGameManager = value; }}
-
+	
 #endregion
 
 // if this class inherits from MonoBehaviour remove constructor and deconstructor.
 #region Constructors
 	public Player(InGameManager pInGameManager){
 		this.inGameManager   = pInGameManager;
-		this.citizens 		 = Data.player.citizen;
+		this.citizensAvailable = Data.player.citizen;		
 		this.energyAvailable = Data.player.energyProduced;
 		this.wood  			 = Data.player.wood;
 		this.stone 			 = Data.player.stone;
 		this.metal 			 = Data.player.metal;
 		this.missiles		 = Data.player.missiles;
+		this.citizensLimit   = this.citizensAvailable;
+		this.citizensToReduce = 0;		
 	}
 
 #endregion
-
-#region Unity Methods
-#endregion
-
+	
 #region Game Methods
-	public void UpdateData(){
+	public void UpdateData(){	
 		inGameManager.CheckPlayerResources(type);
 		inGameManager.UpdatePlayer(this);
+		
+	}	
+	/// <summary>
+	/// When a Facility receives the damage.
+	/// </summary>
+	/// <param name='pFacility'>
+	/// Facility
+	/// </param>
+	/// <param name='ppowerDame'>
+	/// Power damage receive
+	/// </param>
+	public void ReceiveDamage(Facility pFacility , float ppowerDame)
+	{
+		pFacility.Life  -= ppowerDame;
+		if(pFacility.Life  <= 0 ){
+			//If the facility is a building reduce the workers
+			if (typeof(Building).Equals(pFacility.GetType())){
+				citizensToReduce += pFacility.Worker;
+				citizensLimit -= pFacility.Worker;
+				DecreaseCitizens();
+			}
+			InGameManager.RemoveFacility(pFacility, this);						
+			Destroy(pFacility.gameObject);			
+			
+		}		
 	}
+	
+	/// <summary>
+	/// Decreases the citizens.
+	/// </summary>
+	private void DecreaseCitizens(){
+		Debug.Log("Decrease method");
+		if(citizensToReduce>=0){
+			citizensAvailable--;
+			citizensToReduce--;
+			if(!IsInvoking("DecreaseCitizens"))
+			{
+				Debug.Log("call again the decrease");
+				Invoke("DecreaseCitizens",0.2f);
+			}
+		}
+	}
+	
+	public void AddedBuilding(int pCapacity)
+	{
+		if(citizensToReduce>0)
+			if(citizensToReduce>pCapacity)
+				citizensToReduce-=pCapacity;
+			else
+				citizensToReduce= 0;
+	}
+	
 #endregion
-
+	
 }

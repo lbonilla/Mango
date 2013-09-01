@@ -75,7 +75,7 @@ public class IGMControllerManager : MonoBehaviour {
 	}
 
 	public void updateViewLabelText (Player pPlayer){
-		viewManager.updateLabelText(pPlayer.Type, "citizen", pPlayer.Citizens);
+		viewManager.updateLabelText(pPlayer.Type, "citizen", pPlayer.CitizensAvailable);
 		int value = pPlayer.EnergyAvailable - pPlayer.EnergyRequired;
 		viewManager.updateLabelText(pPlayer.Type, "energy", value);
 		viewManager.updateLabelText(pPlayer.Type, "wood", pPlayer.Wood);
