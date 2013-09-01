@@ -38,7 +38,12 @@ public class Player:MonoBehaviour {
 #endregion
 
 #region Properties
-	public int CitizensAvailable{get{return citizensAvailable; } set{citizensAvailable = value;}}		
+	public int CitizensAvailable{get{return citizensAvailable; } 
+		set{
+			citizensAvailable = value;
+			citizensLimit= value;
+		}
+	}		
 	public int CitizensLimit{get{return citizensLimit;} set{citizensLimit=value;}}
 	public int CitizensToReduce{get{return citizensToReduce;} set {citizensToReduce= value;}}
 	public int EnergyRequired { get { return energyRequired; } set { energyRequired = value; } }
@@ -117,32 +122,50 @@ public class Player:MonoBehaviour {
 			if (typeof(Building).Equals(pFacility.GetType())){
 				citizensToReduce += pFacility.Citizen;
 				citizensLimit -= pFacility.Citizen;
-				DecreaseCitizens();
+			}else
+			{
+				Debug.Log("Is not building");
+				if(citizensToReduce >= pFacility.Worker){
+					citizensToReduce-= pFacility.Worker;
+					Debug.Log("Citizens to reduce up than worker: "+citizensToReduce);
+				}
+				
+				else
+				{					
+					if(citizensToReduce<0)
+						citizensToReduce=0;
+					citizensLimit += pFacility.Worker - citizensToReduce;
+					citizensAvailable = citizensLimit;
+					citizensToReduce=0;
+				}
 			}
-
+			UpdateCitizens();
 			InGameManager.RemoveFacility(pFacility, this);						
 			Destroy(pFacility.gameObject);			
 		}		
 	}
 	
 	/// <summary>
-	/// Decreases the citizens.
+	/// Updates the citizens.
 	/// </summary>
-	private void DecreaseCitizens(){
-		Debug.Log("Decrease method");
+	private void UpdateCitizens(){
 		if(citizensToReduce >= 0){
-			Debug.Log("Decreasing citizens.....");
 			citizensAvailable--;
 			citizensToReduce--;
 			inGameManager.UpdatePlayer(this);
-			if(!IsInvoking("DecreaseCitizens"))
+			if(!IsInvoking("UpdateCitizens"))
 			{
-				Debug.Log("call again the decrease");
-				Invoke("DecreaseCitizens", 2f);
+				Invoke("UpdateCitizens", 2f);
 			}
 		}
 	}
 	
+	/// <summary>
+	/// Addeds the building.
+	/// </summary>
+	/// <param name='pCapacity'>
+	/// Capacity of citizens of the building
+	/// </param>
 	public void AddedBuilding(int pCapacity)
 	{
 		if(citizensToReduce>0)

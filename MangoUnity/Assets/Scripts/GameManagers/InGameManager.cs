@@ -804,8 +804,8 @@ public class InGameManager : MonoBehaviour {
 		
 		switch(pPlayer.Type){
 			case Players.Player1:
-				player1.CitizensAvailable 		-= pFacility.Citizen;
-				player1.CitizensAvailable    	+= pFacility.Worker;
+				/*player1.CitizensAvailable 		-= pFacility.Citizen;
+				player1.CitizensAvailable    	+= pFacility.Worker;*/
 				player1.EnergyAvailable	 -= pFacility.EnergyProduced;
 				player1.EnergyAvailable  += pFacility.EnergyRequired;
 				//player1.Wood 			+= pFacility.Wood;
@@ -816,8 +816,8 @@ public class InGameManager : MonoBehaviour {
 			
 			break;
 			case Players.Player2:
-				player2.CitizensAvailable -= pFacility.Citizen;
-				player2.CitizensAvailable += pFacility.Worker;
+				/*player2.CitizensAvailable -= pFacility.Citizen;
+				player2.CitizensAvailable += pFacility.Worker;*/
 				player2.EnergyAvailable	 -= pFacility.EnergyProduced;
 				player2.EnergyAvailable  += pFacility.EnergyRequired;
 				//player2.Wood 			+= pFacility.Wood;
