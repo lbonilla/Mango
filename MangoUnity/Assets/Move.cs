@@ -20,14 +20,13 @@ public class Move : MonoBehaviour {
 #endregion
 
 #region Public Variables
-	public float TopSpeed = 0.5f;
 	public float CurveSpeed = 5;
 	public float CurveRange = 1;
     public float MoveSpeed = 1;
-    float fTime = 0;
-	float fSpeed = 0;
-    Vector3 lastPos = Vector3.zero;
-	float ran;
+    private float fTime = 0;
+	private float fSpeed = 0;
+    private Vector3 lastPos = Vector3.zero;
+	private float randonDirection;
 #endregion
 
 #region Private Variables
@@ -48,14 +47,14 @@ public class Move : MonoBehaviour {
 	 	lastPos = transform.position;
         CurveRange = Random.Range(2, 5);
 		MoveSpeed = Random.Range(8, 10);
-		ran = Random.Range(0.1f, 1f);
+		randonDirection = Random.Range(0.1f, 1f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	    lastPos = transform.position;
 		
-       	fTime += (Time.deltaTime * CurveSpeed) * ran;
+       	fTime += (Time.deltaTime * CurveSpeed) * randonDirection;
 		fSpeed += Time.deltaTime * MoveSpeed;
 	
        	Vector3 vSin = new Vector3((Mathf.Sin(fTime)* CurveRange), fSpeed, 0);

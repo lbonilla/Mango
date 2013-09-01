@@ -25,7 +25,7 @@ public class Missile : MonoBehaviour {
 #region Private Variables
 	public float CurveSpeed = 5;
 	public float CurveRange = 1;
-    public float MoveSpeed = 1;
+    public float MoveSpeed = 0.0001f;
     private float fTime = 0;
 	private float fSpeed = 0;
     private Vector3 lastPos = Vector3.zero;
@@ -47,9 +47,11 @@ public class Missile : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		lastPos = transform.position;
-        CurveRange = Random.Range(2, 5);
-		MoveSpeed = Random.Range(8, 10);
-		randonDirection = Random.Range(0.1f, 1f);
+		CurveSpeed = Random.Range(8, 10);
+        CurveRange = Random.Range(0.01f, 0.03f);
+		MoveSpeed = Random.Range(0.02f, 0.04f);
+		randonDirection = Random.Range(0.1f, 0.3f);
+
 	}
 	
 	// Update is called once per frame
@@ -63,7 +65,8 @@ public class Missile : MonoBehaviour {
 	
        	Vector3 vSin = new Vector3((Mathf.Sin(fTime)* CurveRange), fSpeed, 0);
    
-       	transform.position += vSin * Time.deltaTime;
+       	//transform.position += vSin * Time.deltaTime;
+		transform.Translate(vSin);
  
        	Debug.DrawLine(lastPos, transform.position, Color.green, 100);
 	}
