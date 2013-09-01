@@ -97,6 +97,7 @@
 'Assets/Scripts/Game/RotateCube.cs'
 'Assets/Scripts/Game/WoodMill.cs'
 'Assets/Scripts/Game/World.cs'
+'Assets/Scripts/Game/WorldLimit.cs'
 'Assets/Scripts/Game/WorldSlot.cs'
 'Assets/Scripts/GameManagers/GameManager.cs'
 'Assets/Scripts/GameManagers/InGameManager.cs'

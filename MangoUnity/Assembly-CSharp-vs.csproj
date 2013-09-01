@@ -109,6 +109,7 @@
      <Compile Include="Assets\Scripts\Game\RotateCube.cs" />
      <Compile Include="Assets\Scripts\Game\WoodMill.cs" />
      <Compile Include="Assets\Scripts\Game\World.cs" />
+     <Compile Include="Assets\Scripts\Game\WorldLimit.cs" />
      <Compile Include="Assets\Scripts\Game\WorldSlot.cs" />
      <Compile Include="Assets\Scripts\GameManagers\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameManagers\InGameManager.cs" />
