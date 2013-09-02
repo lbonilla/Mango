@@ -11,9 +11,13 @@ public enum Players{Player1, Player2}
 
 public class InGameManager : MonoBehaviour {
 	
+	#region Enums
 	public enum FacilityType{ building, missileDefender, energyPlant,	woodMill };
-	public enum PlayerType{ player1 = 1, player2 = 2 };
-
+	public enum PlayerType{ player1 = 1, player2 = 2 };	
+	public enum GameModes{destroyObjective,againstClock,warToDeath, worldHealth,qtyCitizens};
+	#endregion
+	
+	#region Public Attributes	
 	public Camera gameCamera;	
 	
 	public GameObject building;
@@ -28,14 +32,20 @@ public class InGameManager : MonoBehaviour {
 	public GameObject metalFactory;
 
 	public GameObject p1World;
-	public GameObject p2World;
+	public GameObject p2World;	
 	
-	private IGMControllerManager controllerManager;
-	private bool canAddMissile = true;
 	public Player player1;
 	public Player player2;
 	
-
+	public GameModes gameMode;
+	#endregion 
+	
+	#region Private Attributes
+	private IGMControllerManager controllerManager;
+	private bool canAddMissile = true;
+	#endregion
+	
+	#region Untiy Methods	
 	// Use this for initialization
 	void Start () {
 		Data data = new Data();
@@ -49,42 +59,30 @@ public class InGameManager : MonoBehaviour {
 		Invoke("UpdatePlayersOnInit", 0.2f);
 	}
 	
-	void UpdatePlayersOnInit(){
-		UpdatePlayer(player1);
-		UpdatePlayer(player2);
-
-		AddEnergyPlant(Players.Player1);
-		AddWoodMill(Players.Player1);
-		AddQuarry(Players.Player1);
-		AddMetalFactory(Players.Player1);
-		AddBuilding(Players.Player1);
+	// Update is called once per frame
+	void Update () {
 		
-		AddEnergyPlant(Players.Player2);
-		AddBuilding(Players.Player2);
-		AddWoodMill(Players.Player2);
-		AddQuarry(Players.Player2);
-		AddMetalFactory(Players.Player2);
+        Ray ray = gameCamera.ScreenPointToRay(Input.mousePosition);
 		
-	}
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 1000)){
+            Debug.DrawLine(ray.origin, hit.point, Color.red, 20.0f, true);
+			//Debug.Log(hit.collider.gameObject.name);
+    	}
 
-	private void SetWinner (){
-		
-
-		/*(if(player1.Citizens > 0){
-			EndGame();	
-			Data.winner = "Player 1 Wins!";
-		}else if(player2.Citizens > 0){
-			EndGame();
-			Data.winner = "Player 2 Wins!";
+		if (Input.GetMouseButton(0) && canAddMissile){
+			//Debug.Log("Pressed left click.");
+			//Debug.Log("x: "+ ray.origin.x);
+			//Debug.Log("y: "+ ray.origin.y);
+			//canAddMissile = false;
+			//AddMissile(new Vector3(ray.origin.x, ray.origin.y, 17.0f));
 		}
-		*/
-	}
 
-	private void EndGame () {
-		controllerManager.ShutDown();
-		Application.LoadLevel("menuScreen");
-	}
-
+	}	
+	
+	#endregion
+	
+	#region Player Methods	
 	public void CheckPlayerResources (Players pPlayer){
 	
 		switch(pPlayer){
@@ -284,28 +282,82 @@ public class InGameManager : MonoBehaviour {
 			break;
 		}
 	}
-
-	// Update is called once per frame
-	void Update () {
-		
-        Ray ray = gameCamera.ScreenPointToRay(Input.mousePosition);
-		
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 1000)){
-            Debug.DrawLine(ray.origin, hit.point, Color.red, 20.0f, true);
-			//Debug.Log(hit.collider.gameObject.name);
-    	}
-
-		if (Input.GetMouseButton(0) && canAddMissile){
-			//Debug.Log("Pressed left click.");
-			//Debug.Log("x: "+ ray.origin.x);
-			//Debug.Log("y: "+ ray.origin.y);
-			//canAddMissile = false;
-			//AddMissile(new Vector3(ray.origin.x, ray.origin.y, 17.0f));
-		}
-
+	
+	public void UpdatePlayer(Player pPlayer){
+		controllerManager.updateViewLabelText(pPlayer);
 	}
+		
+	void UpdatePlayersOnInit(){
+		UpdatePlayer(player1);
+		UpdatePlayer(player2);
 
+		AddEnergyPlant(Players.Player1);
+		AddWoodMill(Players.Player1);
+		AddQuarry(Players.Player1);
+		AddMetalFactory(Players.Player1);
+		AddBuilding(Players.Player1);
+		
+		AddEnergyPlant(Players.Player2);
+		AddBuilding(Players.Player2);
+		AddWoodMill(Players.Player2);
+		AddQuarry(Players.Player2);
+		AddMetalFactory(Players.Player2);
+		
+	}	
+	#endregion
+	
+	#region Game Methods
+	private void EndGame () {
+		controllerManager.ShutDown();
+		Application.LoadLevel("menuScreen");
+	}
+	
+	private void SetWinner (){
+		
+
+		/*(if(player1.Citizens > 0){
+			EndGame();	
+			Data.winner = "Player 1 Wins!";
+		}else if(player2.Citizens > 0){
+			EndGame();
+			Data.winner = "Player 2 Wins!";
+		}
+		*/
+	}
+	#endregion
+	
+	#region Facilities Methods
+	private void AddFacility(Facility pFacility, Players pPlayer){	
+		switch(pPlayer){
+			case Players.Player1:
+				pFacility.Owner = player1;
+				player1.CitizensAvailable 		+= pFacility.Citizen;
+				player1.CitizensAvailable    	-= pFacility.Worker;
+				player1.EnergyAvailable += pFacility.EnergyProduced;
+				player1.EnergyAvailable -= pFacility.EnergyRequired;
+				player1.Wood 			-= pFacility.Wood;
+				player1.Metal    		-= pFacility.Metal;
+				player1.Stone    		-= pFacility.Stone;
+				UpdatePlayer(player1);				
+			break;
+			case Players.Player2:
+				pFacility.Owner = player2;
+				player2.CitizensAvailable 		+= pFacility.Citizen;
+				player2.CitizensAvailable    	-= pFacility.Worker;
+				player2.EnergyAvailable += pFacility.EnergyProduced;
+				player2.EnergyAvailable -= pFacility.EnergyRequired;
+				player2.Wood 			-= pFacility.Wood;
+				player2.Metal    		-= pFacility.Metal;
+				player2.Stone    		-= pFacility.Stone;
+				UpdatePlayer(player2);
+			break;
+			default:
+			break;
+		}
+		
+		CheckPlayerResources(pPlayer);
+	}
+	
 	public void AddBuilding (Players pPlayer){	
 		int slotPosition = 0;
 		GameObject go;
@@ -360,7 +412,6 @@ public class InGameManager : MonoBehaviour {
 		}
 	}
 
-
 	public void AddEnergyPlant(Players pPlayer){
 
 		int slotPosition = 0;
@@ -412,7 +463,6 @@ public class InGameManager : MonoBehaviour {
 		}
 
 	}
-
 
 	public void AddWoodMill(Players pPlayer){
 		int slotPosition = 0;
@@ -514,7 +564,6 @@ public class InGameManager : MonoBehaviour {
 		}	
 	}
 
-
 	public void AddMetalFactory(Players pPlayer){
 		int slotPosition = 0;
 		GameObject go;
@@ -564,8 +613,7 @@ public class InGameManager : MonoBehaviour {
 			break;
 		}	
 	}
-	
-	
+		
 	public void AddFactory(Players pPlayer){
 		int slotPosition = 0;
 		GameObject go;
@@ -770,60 +818,25 @@ public class InGameManager : MonoBehaviour {
 	
 	}
 
-	private void AddFacility(Facility pFacility, Players pPlayer){	
-		switch(pPlayer){
-			case Players.Player1:
-				pFacility.Owner = player1;
-				player1.CitizensAvailable 		+= pFacility.Citizen;
-				player1.CitizensAvailable    	-= pFacility.Worker;
-				player1.EnergyAvailable += pFacility.EnergyProduced;
-				player1.EnergyAvailable -= pFacility.EnergyRequired;
-				player1.Wood 			-= pFacility.Wood;
-				player1.Metal    		-= pFacility.Metal;
-				player1.Stone    		-= pFacility.Stone;
-				UpdatePlayer(player1);				
-			break;
-			case Players.Player2:
-				pFacility.Owner = player2;
-				player2.CitizensAvailable 		+= pFacility.Citizen;
-				player2.CitizensAvailable    	-= pFacility.Worker;
-				player2.EnergyAvailable += pFacility.EnergyProduced;
-				player2.EnergyAvailable -= pFacility.EnergyRequired;
-				player2.Wood 			-= pFacility.Wood;
-				player2.Metal    		-= pFacility.Metal;
-				player2.Stone    		-= pFacility.Stone;
-				UpdatePlayer(player2);
-			break;
-			default:
-			break;
-		}
-		
-		CheckPlayerResources(pPlayer);
+	private void AddMissile(Vector3 pPosition){
+		GameObject m = Instantiate(missile, pPosition, new Quaternion(0, 0, 0,0)) as GameObject;
+		m.name = "p1m";
+		Invoke("EnableAddingMissile", 0.1f);
 	}
-
+	
 	public void RemoveFacility(Facility pFacility, Player pPlayer){
 		
 		switch(pPlayer.Type){
 			case Players.Player1:
-				/*player1.CitizensAvailable 		-= pFacility.Citizen;
-				player1.CitizensAvailable    	+= pFacility.Worker;*/
 				player1.EnergyAvailable	 -= pFacility.EnergyProduced;
 				player1.EnergyAvailable  += pFacility.EnergyRequired;
-				//player1.Wood 			+= pFacility.Wood;
-				//player1.Metal    		+= pFacility.Metal;
-				//player1.Stone    		+= pFacility.Stone;
 				UpdatePlayer(player1);
 				
 			
 			break;
 			case Players.Player2:
-				/*player2.CitizensAvailable -= pFacility.Citizen;
-				player2.CitizensAvailable += pFacility.Worker;*/
 				player2.EnergyAvailable	 -= pFacility.EnergyProduced;
 				player2.EnergyAvailable  += pFacility.EnergyRequired;
-				//player2.Wood 			+= pFacility.Wood;
-				//player2.Metal    		+= pFacility.Metal;
-				//player2.Stone    		+= pFacility.Stone;
 				UpdatePlayer(player2);
 			break;
 			default:
@@ -833,23 +846,10 @@ public class InGameManager : MonoBehaviour {
 		CheckPlayerResources(pPlayer.Type);
 		SetWinner();		
 	}
-
-	private void AddMissile(Vector3 pPosition){
-		GameObject m = Instantiate(missile, pPosition, new Quaternion(0, 0, 0,0)) as GameObject;
-		m.name = "p1m";
-		Invoke("EnableAddingMissile", 0.1f);
-	}
 	
 	private void EnableAddingMissile(){
 		canAddMissile = true;
-	}
+	}	
+	#endregion
 	
-	public void UpdatePlayer(Player pPlayer){
-		controllerManager.updateViewLabelText(pPlayer);
-	}
-	
-	public void ReduceCitizensAvailable(Player pPlayer, int pCantToRemove){
-	
-				
-	}
 }
