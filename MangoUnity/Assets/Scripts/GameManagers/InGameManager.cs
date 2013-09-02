@@ -2,6 +2,12 @@
 using System.Collections;
 public enum Players{Player1, Player2}
 
+// File: SoundManager
+// Project:
+// Description:
+// Author:Esteban Padilla
+// Email: 
+// Copyright (C) 2013,  (R). All rights reserved.  
 
 public class InGameManager : MonoBehaviour {
 	
