@@ -87,9 +87,14 @@ public class WorldSlot: MonoBehaviour {
 #region Unity Methods
 	void Start(){
 		isFree = true;
-		position = transform.position;
-		
+		position = transform.position;	
 	}
+
+	void OnTriggerEnter(Collider other) {
+		if(!isFree){ return; }
+		this.isFree = false;
+		this.gameObject.SetActive(false);
+    }
 #endregion
 
 #region Game Methods
