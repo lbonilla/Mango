@@ -52,23 +52,30 @@ public class EnergyPlant : Facility {
 #endregion
 
 #region Unity Methods
-		override public void OnUpdate(){
-			
-		}
-	
-		void OnMouseDown(){
-			isOn = !isOn;
-			if(isOn){
-				gameObject.transform.FindChild("energyPlant_mod").renderer.material.mainTexture = onTexture;
-			}else{
-				gameObject.transform.FindChild("energyPlant_mod").renderer.material.mainTexture = offTexture;
-			}
-		}
+	override public void OnUpdate(){
+		
+	}
 
-		void OnTriggerEnter(Collider other) {
-			Owner.ReceiveDamage(this,other.gameObject.GetComponent<Missile>().DestructionPower);
-			Destroy(other.gameObject);	
-	    }
+	void OnMouseDown(){
+		isOn = !isOn;
+		if(isOn){
+			gameObject.transform.FindChild("energyPlant_mod").renderer.material.mainTexture = onTexture;
+			Owner.CitizensAvailable -= Worker;
+			Owner.EnergyAvailable += EnergyProduced;
+			Owner.EnergyAvailable -= EnergyRequired;	
+		}else{
+			gameObject.transform.FindChild("energyPlant_mod").renderer.material.mainTexture = offTexture;
+			Owner.CitizensAvailable += Worker;
+			Owner.EnergyAvailable -= EnergyProduced;
+			Owner.EnergyAvailable += EnergyRequired;
+		}
+		Owner.UpdateData();
+	}
+
+	void OnTriggerEnter(Collider other) {
+		Owner.ReceiveDamage(this,other.gameObject.GetComponent<Missile>().DestructionPower);
+		Destroy(other.gameObject);	
+    }
 #endregion
 
 }

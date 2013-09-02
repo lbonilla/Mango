@@ -47,7 +47,7 @@ public static string winner = "";
 		//Facility Settings
 		//Player
 		player.life				=  0;
-		player.citizen 			=  10;
+		player.citizen 			= 10;
 		player.worker     		=  0;
 		player.energyRequired 	=  0;
 		player.energyProduced 	=  5;
@@ -56,7 +56,7 @@ public static string winner = "";
 		player.metal 			= 55;
 		player.product   		=  0;
 		player.productionTime   =  0;
-		player.missiles         =100;
+		player.missiles         =  4;
 		player.missileLoad      =  0;
 
 		//Building
@@ -75,7 +75,7 @@ public static string winner = "";
 		//Energy Plant
 		energyPlant.life      		= 15;
 		energyPlant.citizen 	 	=  0;
-		energyPlant.worker         	=  0;	
+		energyPlant.worker         	=  1;	
 		energyPlant.energyRequired 	=  0;
 		energyPlant.energyProduced 	= 15;
 		energyPlant.wood 			=  5;

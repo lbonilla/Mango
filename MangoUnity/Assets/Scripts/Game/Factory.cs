@@ -67,9 +67,16 @@ public class Factory : Facility {
 		isOn = !isOn;
 		if(isOn){
 			gameObject.transform.FindChild("factory_mod").renderer.material.mainTexture = onTexture;
+			Owner.CitizensAvailable -= Worker;
+			Owner.EnergyAvailable += EnergyProduced;
+			Owner.EnergyAvailable -= EnergyRequired;
 		}else{
 			gameObject.transform.FindChild("factory_mod").renderer.material.mainTexture = offTexture;
+			Owner.CitizensAvailable += Worker;
+			Owner.EnergyAvailable -= EnergyProduced;
+			Owner.EnergyAvailable += EnergyRequired;
 		}
+		Owner.UpdateData();
 	}
 
 	void OnTriggerEnter(Collider other) {

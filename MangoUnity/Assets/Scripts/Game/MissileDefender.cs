@@ -97,10 +97,17 @@ public class MissileDefender : Facility {
 		if(isOn){
 			top.transform.FindChild("missileDefender_mod").renderer.material.mainTexture = onTexture;
 			top.animation.Play();
+			Owner.CitizensAvailable -= Worker;
+			Owner.EnergyAvailable += EnergyProduced;
+			Owner.EnergyAvailable -= EnergyRequired;
 		}else{
 			top.transform.FindChild("missileDefender_mod").renderer.material.mainTexture = offTexture;
 			top.animation.Stop();
+			Owner.CitizensAvailable += Worker;
+			Owner.EnergyAvailable -= EnergyProduced;
+			Owner.EnergyAvailable += EnergyRequired;
 		}
+		Owner.UpdateData();
 	}
 
 	void OnTriggerEnter(Collider other) {

@@ -44,6 +44,26 @@ public class SoundManager : MonoBehaviour {
 		audioSources["missionExplotion"].loop = false;
 		audioSources["missionExplotion"].clip = clip;
 		
+		AudioClip clip1 = Resources.Load("Audio/missileExplotion1") as AudioClip; 
+		audioSources["missionExplotion1"] = gameObject.AddComponent<AudioSource>() as AudioSource;
+		audioSources["missionExplotion1"].loop = false;
+		audioSources["missionExplotion1"].clip = clip1;
+
+		AudioClip clip2 = Resources.Load("Audio/missileExplotion1") as AudioClip; 
+		audioSources["missionExplotion2"] = gameObject.AddComponent<AudioSource>() as AudioSource;
+		audioSources["missionExplotion2"].loop = false;
+		audioSources["missionExplotion2"].clip = clip2;
+
+
+		AudioClip clip3 = Resources.Load("Audio/missileExplotion1") as AudioClip; 
+		audioSources["missionExplotion3"] = gameObject.AddComponent<AudioSource>() as AudioSource;
+		audioSources["missionExplotion3"].loop = false;
+		audioSources["missionExplotion3"].clip = clip3;
+	
+		AudioClip clip4 = Resources.Load("Audio/missileExplotion1") as AudioClip; 
+		audioSources["missionExplotion4"] = gameObject.AddComponent<AudioSource>() as AudioSource;
+		audioSources["missionExplotion4"].loop = false;
+		audioSources["missionExplotion4"].clip = clip4;
 	}
 	
 
@@ -52,6 +72,31 @@ public class SoundManager : MonoBehaviour {
 #region Game Methods
 	public void PlayAudio(string value){
 		audioSources[value].Play();
+	}
+
+	public void PlayExplotion(){	
+		int value = (int)Random.Range(0 , 5);
+		print(value);
+		switch(value){
+			case 0:
+				audioSources["missionExplotion"].Play();
+			break;
+			case 1:
+				audioSources["missionExplotion1"].Play();
+			break;
+			case 2:
+				audioSources["missionExplotion2"].Play();
+			break;
+			case 3:
+				audioSources["missionExplotion3"].Play();
+			break;
+			case 4:
+				audioSources["missionExplotion4"].Play();
+			break;
+			default:
+			break;
+		}
+
 	}
 
 	private void PlayIt(AudioClip p_sound, bool p_loop) {

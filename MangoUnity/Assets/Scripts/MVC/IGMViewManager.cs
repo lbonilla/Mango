@@ -51,9 +51,6 @@ public class IGMViewManager : MonoBehaviour {
 			fparams.AddResolutionLevel (Screen.width, 1.0f, 1.0f, "");
 		}
 
-		print("hi");
-
-
 		fparams.origin = new Vector2 (0, 0.5f);
 		Futile.instance.Init (fparams);
 		stage = Futile.stage;

@@ -74,7 +74,7 @@ public class Missile : MonoBehaviour {
 
 
     void OnTriggerEnter(Collider other) {
-		GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().PlayAudio("missionExplotion");
+		GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().PlayExplotion();
     }
 #endregion
 

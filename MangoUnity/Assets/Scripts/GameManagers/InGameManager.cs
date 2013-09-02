@@ -40,28 +40,22 @@ public class InGameManager : MonoBehaviour {
 		//player2 = new Player(this);
 		player2.Type = Players.Player2;
 		player2.InitPlayer();
-		Invoke("UpdatePlayersOnInit", 0.1f);
+		Invoke("UpdatePlayersOnInit", 0.2f);
 	}
 	
 	void UpdatePlayersOnInit(){
 		UpdatePlayer(player1);
 		UpdatePlayer(player2);
 
-		//AddBuilding(Players.Player1);
-		//AddEnergyPlant(Players.Player1);
-		//AddWoodMill(Players.Player1);
-		//AddQuarry(Players.Player1);
-		//AddMetalFactory(Players.Player1);
-		AddMissileLauncher(Players.Player1);
+		AddEnergyPlant(Players.Player1);
+		AddWoodMill(Players.Player1);
+		AddQuarry(Players.Player1);
+		AddMetalFactory(Players.Player1);
+		AddBuilding(Players.Player1);
 		
-
-		AddBuilding(Players.Player2);
 		AddEnergyPlant(Players.Player2);
 		AddBuilding(Players.Player2);
-		AddBuilding(Players.Player2);
-		AddBuilding(Players.Player2);
 		AddWoodMill(Players.Player2);
-		AddBuilding(Players.Player2);
 		AddQuarry(Players.Player2);
 		AddMetalFactory(Players.Player2);
 		
@@ -323,6 +317,7 @@ public class InGameManager : MonoBehaviour {
 					go = Instantiate(building, slot.Position, Quaternion.identity) as GameObject;
 					go.name = "p1_building_pref" + Facility.id;		
 					go.transform.Rotate(new Vector3(0, 0, 1), slot.Angle);
+					go.gameObject.transform.parent = p1World.transform;
 					Facility fac=go.GetComponent<Facility>();
 					player1.AddedBuilding(fac.Citizen);		
 					AddFacility(fac, pPlayer);

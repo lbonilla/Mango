@@ -64,9 +64,16 @@ public class Quarry : Facility {
 		
 		if(isOn){
 			gameObject.transform.FindChild("quarry_mod").renderer.material.mainTexture = onTexture;
+			Owner.CitizensAvailable -= Worker;
+			Owner.EnergyAvailable += EnergyProduced;
+			Owner.EnergyAvailable -= EnergyRequired;
 		}else{
 			gameObject.transform.FindChild("quarry_mod").renderer.material.mainTexture = offTexture;
+			Owner.CitizensAvailable += Worker;
+			Owner.EnergyAvailable -= EnergyProduced;
+			Owner.EnergyAvailable += EnergyRequired;
 		}
+		Owner.UpdateData();
 	}
 
 	void OnTriggerEnter(Collider other) {
